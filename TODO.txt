@@ -1,0 +1,7 @@
+ireactable to do list
+---------------------
+
+- define preliminary OSC protocol
+- make a Pd patch that receives that OSC protocol
+
+- adapt iphone multitouch example app
