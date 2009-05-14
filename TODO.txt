@@ -2,5 +2,9 @@ ireactable to do list
 ---------------------
 
 - make a Pd patch that receives that OSC protocol
+- figure out how to dynamically connect Pd objects
+- create encapsulated versions of ireactable objects
 
-- adapt iphone multitouch example app
+- adapt iphone multitouch example app ("Touches")
+- create images for 3 objects: squarewave, vcf, lfo
+- create background image (blue with circles)
