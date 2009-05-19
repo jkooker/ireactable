@@ -3,7 +3,9 @@ ireactable to do list
 
 - make a Pd patch that receives that OSC protocol
 + figure out how to dynamically connect Pd objects (DONE: throw~/catch~ blocks are probably better than send~/receive~)
-- create encapsulated versions of ireactable objects
++ create encapsulated versions of ireactable objects
+- fix pwm~ to take signal input
++ make objects receive sum of signal input and control input for first parameter
 
 - adapt iphone multitouch example app ("Touches")
 - create images for 3 objects: squarewave, vcf, lfo

@@ -1,0 +1,7 @@
+#N canvas 895 448 450 300 10;
+#X obj 236 208 catch~ devnull;
+#X obj 50 95 ir_squarewave~;
+#X obj 60 218 ir_sink~;
+#X obj 180 99 ir_vcf~;
+#X obj 273 106 ir_lfo~;
+#X text 234 227 goes nowhere;
