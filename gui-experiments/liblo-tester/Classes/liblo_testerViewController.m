@@ -8,10 +8,22 @@
 
 #import "liblo_testerViewController.h"
 
-#import "lo/lo.h"
 
 
 @implementation liblo_testerViewController
+
+
+- (IBAction)sendMessage1:(id)sender
+{
+    lo_send(t, "/quit", NULL);
+}
+
+- (IBAction)sendMessage2:(id)sender
+{
+    if (lo_send(t, "/foo/bar", "ff", 0.12345678f, 23.0f) == -1) {
+        printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
+    }
+}
 
 
 
@@ -32,12 +44,14 @@
 */
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    t = lo_address_new(NULL, "7000");
 }
-*/
+
 
 
 /*

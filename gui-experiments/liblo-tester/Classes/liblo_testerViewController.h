@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "lo/lo.h"
+
 
 @interface liblo_testerViewController : UIViewController {
-
+    lo_address t;
 }
+
+- (IBAction)sendMessage1:(id)sender;
+- (IBAction)sendMessage2:(id)sender;
 
 @end
 
