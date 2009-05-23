@@ -1,6 +1,14 @@
 #N canvas 645 128 450 300 10;
 #X obj 49 68 dumpOSC 7000;
-#X obj 50 117 print osc;
 #X text 21 21 receives and prints OSC messages from the iPhone simulator
 ;
-#X connect 0 0 1 0;
+#X obj 49 101 OSCroute /ireactable;
+#X obj 50 136 OSCroute /connection;
+#X obj 49 179 print irconnection;
+#X obj 180 176 print ir;
+#X obj 257 178 print other;
+#X connect 0 0 2 0;
+#X connect 2 0 3 0;
+#X connect 2 1 6 0;
+#X connect 3 0 4 0;
+#X connect 3 1 5 0;
