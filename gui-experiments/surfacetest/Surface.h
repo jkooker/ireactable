@@ -15,6 +15,9 @@
     
     UIImageView *activeImage;
     NSArray *allImages;
+    
+    CGPoint primaryTouchLocation;
+    CGPoint secondaryTouchLocation;
 }
 
 @end
