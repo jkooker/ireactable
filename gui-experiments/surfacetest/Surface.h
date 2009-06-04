@@ -14,6 +14,7 @@
     IBOutlet UIImageView *lfo;
     
     UIImageView *activeImage;
+    NSArray *allImages;
 }
 
 @end

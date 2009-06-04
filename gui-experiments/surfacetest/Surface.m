@@ -14,6 +14,8 @@
 - (void)awakeFromNib
 {
     activeImage = nil;
+    
+    allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, nil] retain];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -30,6 +32,7 @@
 
 
 - (void)dealloc {
+    [allImages release];
     [super dealloc];
 }
 
@@ -40,6 +43,14 @@
     CGPoint touchPoint = [[touches anyObject] locationInView:self];
     
     // figure out which object got tapped
+    for (UIImageView *anImage in allImages) {
+        if (CGRectContainsPoint([anImage frame], touchPoint)) {
+            NSLog(@"touched an image");
+            activeImage = anImage;
+        }
+    }
+    
+#if 0
     if (CGRectContainsPoint([squarewave frame], touchPoint)) {
         NSLog(@"touched squarewave");
         activeImage = squarewave;
@@ -50,6 +61,7 @@
         NSLog(@"touched lfo");
         activeImage = lfo;
     }
+#endif
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
