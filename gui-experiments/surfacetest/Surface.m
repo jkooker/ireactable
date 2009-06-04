@@ -9,6 +9,8 @@
 #import "Surface.h"
 
 #define CGPointNull CGPointMake(-1, -1)
+#define TRACE NSLog(@"%@ %s", [self class], _cmd)
+
 
 @implementation Surface
 
@@ -86,7 +88,7 @@
     
     // reset certain touch locations
     for (UITouch *touch in touches) {
-        if (CGPointEqualToPoint([touch locationInView:self], primaryTouchLocation)) {
+        if (CGPointEqualToPoint([touch previousLocationInView:self], primaryTouchLocation) || CGPointEqualToPoint([touch locationInView:self], primaryTouchLocation)) {
             primaryTouchLocation = CGPointNull;
         }
     }
