@@ -49,19 +49,6 @@
             activeImage = anImage;
         }
     }
-    
-#if 0
-    if (CGRectContainsPoint([squarewave frame], touchPoint)) {
-        NSLog(@"touched squarewave");
-        activeImage = squarewave;
-    } else if (CGRectContainsPoint([vcf frame], touchPoint)) {
-        NSLog(@"touched vcf");
-        activeImage = vcf;
-    } else if (CGRectContainsPoint([lfo frame], touchPoint)) {
-        NSLog(@"touched lfo");
-        activeImage = lfo;
-    }
-#endif
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
