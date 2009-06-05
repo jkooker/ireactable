@@ -22,8 +22,7 @@
     activeImage = nil;
     
     allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, nil] retain];
-    NSEnumerator *enumerator = [allImages reverseObjectEnumerator];
-    for (UIImageView *image in enumerator) {
+    for (UIImageView *image in [allImages reverseObjectEnumerator]) {
         [self bringSubviewToFront:image];
     }
     
