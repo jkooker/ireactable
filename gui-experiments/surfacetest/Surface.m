@@ -11,6 +11,9 @@
 #define CGPointNull CGPointMake(-1, -1)
 #define TRACE NSLog(@"%@ %s", [self class], _cmd)
 
+#define GROW_ANIMATION_DURATION_SECONDS 0.15    // Determines how fast a piece size grows when it is moved.
+#define SHRINK_ANIMATION_DURATION_SECONDS 0.15  // Determines how fast a piece size shrinks when a piece stops moving.
+
 
 @implementation Surface
 
@@ -54,7 +57,7 @@
             for (UIImageView *anImage in allImages) {
                 if (CGRectContainsPoint([anImage frame], primaryTouchLocation)) {
                     NSLog(@"touched an image");
-                    activeImage = anImage;
+                    [self activateImage:anImage];
                 }
             }
         } else if (CGPointEqualToPoint(secondaryTouchLocation, CGPointNull)) {
@@ -87,7 +90,7 @@
     for (UITouch *touch in touches) {
         if (CGPointEqualToPoint([touch previousLocationInView:self], primaryTouchLocation) || CGPointEqualToPoint([touch locationInView:self], primaryTouchLocation)) {
             // deactivate tapped view
-            activeImage = nil;
+            [self deactivateImage];
             primaryTouchLocation = CGPointNull;
         }
     }
@@ -96,11 +99,36 @@
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // deactivate tapped view
-    activeImage = nil;
+    [self deactivateImage];
     
     // reset touch locations
     primaryTouchLocation = secondaryTouchLocation = CGPointNull;
 }
 
+#pragma mark Animations
+
+- (void)activateImage:(UIImageView*)image
+{
+    activeImage = image;
+
+    // no idea why we use a touchPointValue
+    NSValue *touchPointValue = [[NSValue valueWithCGPoint:image.center] retain];
+    [UIView beginAnimations:nil context:touchPointValue];
+    [UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
+    CGAffineTransform transform = CGAffineTransformMakeScale(1.2, 1.2);
+	image.transform = transform;
+	[UIView commitAnimations];
+}
+
+- (void)deactivateImage
+{
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationDuration:SHRINK_ANIMATION_DURATION_SECONDS];
+	// Set the transform back to the identity, thus undoing the previous scaling effect.
+	activeImage.transform = CGAffineTransformIdentity;
+	[UIView commitAnimations];
+    
+    activeImage = nil;
+}
 
 @end

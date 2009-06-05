@@ -20,4 +20,7 @@
     CGPoint secondaryTouchLocation;
 }
 
+- (void)activateImage:(UIImageView*)image;
+- (void)deactivateImage;
+
 @end
