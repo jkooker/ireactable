@@ -22,6 +22,10 @@
     activeImage = nil;
     
     allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, nil] retain];
+    NSEnumerator *enumerator = [allImages reverseObjectEnumerator];
+    for (UIImageView *image in enumerator) {
+        [self bringSubviewToFront:image];
+    }
     
     primaryTouchLocation = secondaryTouchLocation = CGPointNull;
 }
@@ -56,8 +60,8 @@
             // figure out which object got tapped
             for (UIImageView *anImage in allImages) {
                 if (CGRectContainsPoint([anImage frame], primaryTouchLocation)) {
-                    NSLog(@"touched an image");
                     [self activateImage:anImage];
+                    break; // don't try to activate any others
                 }
             }
         } else if (CGPointEqualToPoint(secondaryTouchLocation, CGPointNull)) {
