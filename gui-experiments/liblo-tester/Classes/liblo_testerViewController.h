@@ -16,6 +16,7 @@
 
 - (IBAction)sendMessage1:(id)sender;
 - (IBAction)sendMessage2:(id)sender;
+- (IBAction)sendScript:(id)sender;
 
 @end
 

@@ -2,13 +2,13 @@ iReactable OSC Protocol
 -----------------------
 
 /ireactable/[object] [param1] [param2]
-/ireactable/connection [from] [to]
+/ireactable/connect [from] [to] [input]
 
 EXAMPLES
 
 /ireactable/squarewave 440 0.8 (freq ampl)
 /ireactable/vcf 440 0.5 (center_freq wet/dry)
 /ireactable/lfo 5 (freq)
-/ireactable/connection squarewave vcf
-/ireactable/connection vcf out
-/ireactable/connection lfo vcf
+/ireactable/connect squarewave vcf signal
+/ireactable/connect vcf out signal
+/ireactable/connect lfo vcf control
