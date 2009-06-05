@@ -83,12 +83,11 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    // deactivate tapped view
-    activeImage = nil;
-    
     // reset certain touch locations
     for (UITouch *touch in touches) {
         if (CGPointEqualToPoint([touch previousLocationInView:self], primaryTouchLocation) || CGPointEqualToPoint([touch locationInView:self], primaryTouchLocation)) {
+            // deactivate tapped view
+            activeImage = nil;
             primaryTouchLocation = CGPointNull;
         }
     }
