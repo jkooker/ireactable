@@ -72,7 +72,7 @@
             
             // if a view was tapped, move it here
             if (activeImage) {
-                activeImage.center = [[touches anyObject] locationInView:self];
+                activeImage.center = [touch locationInView:self];
             }
         } else {
             // consider all others "secondary"
