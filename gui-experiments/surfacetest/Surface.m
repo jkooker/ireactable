@@ -27,7 +27,7 @@
         [self bringSubviewToFront:image];
     }
     
-    primaryTouchLocation = secondaryTouchLocation = CGPointNull;
+    primaryTouchLocation = secondaryTouchStartLocation = CGPointNull;
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -64,8 +64,8 @@
                     break; // don't try to activate any others
                 }
             }
-        } else if (CGPointEqualToPoint(secondaryTouchLocation, CGPointNull)) {
-            secondaryTouchLocation = [touch locationInView:self];
+        } else if (CGPointEqualToPoint(secondaryTouchStartLocation, CGPointNull)) {
+            secondaryTouchStartLocation = [touch locationInView:self];
         }
     }
 }
@@ -81,9 +81,11 @@
             if (activeImage) {
                 activeImage.center = [touch locationInView:self];
             }
-        } else {
-            // consider all others "secondary"
-            // do nothing with them yet
+        } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchStartLocation) || CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation)) {
+            secondaryTouchEndLocation = [touch locationInView:self];
+            
+            // rotate to that angle
+            [self updateRotation];
         }
     }
 }
@@ -96,6 +98,9 @@
             // deactivate tapped view
             [self deactivateImage];
             primaryTouchLocation = CGPointNull;
+        } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation) || CGPointEqualToPoint([touch locationInView:self], secondaryTouchEndLocation)) {
+            // secondary touch ended
+            secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
         }
     }
 }
@@ -106,7 +111,7 @@
     [self deactivateImage];
     
     // reset touch locations
-    primaryTouchLocation = secondaryTouchLocation = CGPointNull;
+    primaryTouchLocation = secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
 }
 
 #pragma mark Animations
@@ -115,12 +120,10 @@
 {
     activeImage = image;
 
-    // no idea why we use a touchPointValue
-    NSValue *touchPointValue = [[NSValue valueWithCGPoint:image.center] retain];
-    [UIView beginAnimations:nil context:touchPointValue];
+    [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
-    CGAffineTransform transform = CGAffineTransformMakeScale(1.2, 1.2);
-	image.transform = transform;
+	image.transform = CGAffineTransformMakeScale(1.2, 1.2);
+    image.center = primaryTouchLocation;
 	[UIView commitAnimations];
 }
 
@@ -133,6 +136,15 @@
 	[UIView commitAnimations];
     
     activeImage = nil;
+}
+
+- (void)updateRotation
+{
+    // this should be replaced by real angle calculations
+    CGFloat angle = (secondaryTouchStartLocation.y - secondaryTouchEndLocation.y)/15.0;
+    
+    CGAffineTransform t = CGAffineTransformMakeScale(1.2, 1.2);
+    activeImage.transform = CGAffineTransformRotate(t, angle);
 }
 
 @end

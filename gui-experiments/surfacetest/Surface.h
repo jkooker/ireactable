@@ -17,10 +17,12 @@
     NSArray *allImages;
     
     CGPoint primaryTouchLocation;
-    CGPoint secondaryTouchLocation;
+    CGPoint secondaryTouchStartLocation;
+    CGPoint secondaryTouchEndLocation;
 }
 
 - (void)activateImage:(UIImageView*)image;
 - (void)deactivateImage;
+- (void)updateRotation;
 
 @end
