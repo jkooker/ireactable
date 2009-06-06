@@ -21,7 +21,9 @@
 {
     activeImage = nil;
     
-    allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, sink, nil] retain];
+    [self bringSubviewToFront:sink]; // sink is special, and stationary
+    
+    allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, nil] retain];
     for (UIImageView *image in [allImages reverseObjectEnumerator]) {
         [self bringSubviewToFront:image];
     }
@@ -38,26 +40,25 @@
 
 
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
 
     CGContextSetRGBFillColor(contextRef, 0.8, 0, 0, 1);
-    CGContextSetRGBStrokeColor(contextRef, 1, 0, 0, 1);
+    CGContextSetRGBStrokeColor(contextRef, 1, 1, 1, .8);
     CGContextSetLineWidth(contextRef, 3.0);
     
-    // draw from vcf to sink
     CGContextBeginPath(contextRef);
+
+    // draw from vcf to sink
     CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
     CGContextAddLineToPoint(contextRef, sink.center.x, sink.center.y);
+    // draw from squarewave to vcf
+    CGContextMoveToPoint(contextRef, squarewave.center.x, squarewave.center.y);
+    CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+    // draw from lfo to vcf
+    CGContextMoveToPoint(contextRef, lfo.center.x, lfo.center.y);
+    CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+
     CGContextDrawPath(contextRef, kCGPathStroke);
-    
-#if 0
-    CGRect aRect = CGRectMake(5, 5, 15, 15);
-    // Draw a circle (filled)
-    CGContextFillEllipseInRect(contextRef, aRect);
-    // Draw a circle (border only)
-    CGContextStrokeEllipseInRect(contextRef, aRect);
-#endif
 }
 
 
@@ -143,6 +144,7 @@
     [UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
 	image.transform = CGAffineTransformMakeScale(1.2, 1.2);
     image.center = primaryTouchLocation;
+    [self setNeedsDisplay];
 	[UIView commitAnimations];
 }
 
