@@ -16,7 +16,6 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* surfacetestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* surfacetestViewController.m */; };
 		9B6FBB100FC92A2E00B4F66C /* Surface.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6FBB0F0FC92A2E00B4F66C /* Surface.m */; };
-		9B6FBB230FC92A9700B4F66C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB1F0FC92A9700B4F66C /* background.png */; };
 		9B6FBB240FC92A9700B4F66C /* lfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB200FC92A9700B4F66C /* lfo.png */; };
 		9B6FBB250FC92A9700B4F66C /* squarewave.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB210FC92A9700B4F66C /* squarewave.png */; };
 		9B6FBB260FC92A9700B4F66C /* vcf.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB220FC92A9700B4F66C /* vcf.png */; };
@@ -39,10 +38,9 @@
 		8D1107310486CEB800E47090 /* surfacetest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "surfacetest-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		9B6FBB0E0FC92A2E00B4F66C /* Surface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Surface.h; path = ../Surface.h; sourceTree = "<group>"; };
 		9B6FBB0F0FC92A2E00B4F66C /* Surface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Surface.m; path = ../Surface.m; sourceTree = "<group>"; };
-		9B6FBB1F0FC92A9700B4F66C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		9B6FBB200FC92A9700B4F66C /* lfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lfo.png; sourceTree = "<group>"; };
-		9B6FBB210FC92A9700B4F66C /* squarewave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squarewave.png; sourceTree = "<group>"; };
-		9B6FBB220FC92A9700B4F66C /* vcf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vcf.png; sourceTree = "<group>"; };
+		9B6FBB200FC92A9700B4F66C /* lfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lfo.png; path = ../images/lfo.png; sourceTree = "<group>"; };
+		9B6FBB210FC92A9700B4F66C /* squarewave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = squarewave.png; path = ../images/squarewave.png; sourceTree = "<group>"; };
+		9B6FBB220FC92A9700B4F66C /* vcf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vcf.png; path = ../images/vcf.png; sourceTree = "<group>"; };
 		9B7B2C820FDA3ED700919734 /* sink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sink.png; path = ../images/sink.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -105,11 +103,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9B6FBB1F0FC92A9700B4F66C /* background.png */,
-				9B7B2C820FDA3ED700919734 /* sink.png */,
 				9B6FBB200FC92A9700B4F66C /* lfo.png */,
 				9B6FBB210FC92A9700B4F66C /* squarewave.png */,
 				9B6FBB220FC92A9700B4F66C /* vcf.png */,
+				9B7B2C820FDA3ED700919734 /* sink.png */,
 				2899E5210DE3E06400AC0155 /* surfacetestViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* surfacetest-Info.plist */,
@@ -171,7 +168,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* surfacetestViewController.xib in Resources */,
-				9B6FBB230FC92A9700B4F66C /* background.png in Resources */,
 				9B6FBB240FC92A9700B4F66C /* lfo.png in Resources */,
 				9B6FBB250FC92A9700B4F66C /* squarewave.png in Resources */,
 				9B6FBB260FC92A9700B4F66C /* vcf.png in Resources */,
