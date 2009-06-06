@@ -11,10 +11,13 @@
 
 @interface FlipsideViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	id <FlipsideViewControllerDelegate> delegate;
-    NSArray *listData;
+    NSArray *objectsListData;
+    NSArray *settingsListData;
+    NSArray *sectionTitles;
 }
 
-@property (nonatomic, retain) NSArray *listData;
+@property (nonatomic, retain) NSArray *objectsListData;
+@property (nonatomic, retain) NSArray *settingsListData;
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 - (IBAction)done;
 

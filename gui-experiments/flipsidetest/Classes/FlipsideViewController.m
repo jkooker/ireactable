@@ -12,19 +12,26 @@
 @implementation FlipsideViewController
 
 @synthesize delegate;
-@synthesize listData;
+@synthesize settingsListData;
+@synthesize objectsListData;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
-    NSArray *array = [[NSArray alloc] initWithObjects:@"Sleepy", @"Sneezy", 
-        @"Bashful", @"Happy", @"Doc", @"Grumpy", @"Dopey", @"Thorin", 
+    
+    NSArray *array = [[NSArray alloc] initWithObjects:@"Square Wave", @"Filter", @"Oscillator"];
+    self.objectsListData = array;
+    [array release];
+    
+    array = [[NSArray alloc] initWithObjects:@"by John Kooker", @"CSE 237D", 
+        @"Spring 2009", @"Happy", @"Doc", @"Grumpy", @"Dopey", @"Thorin", 
         @"Dorin", @"Nori", @"Ori", @"Balin", @"Dwalin", @"Fili", @"Kili", 
         @"Oin", @"Gloin", @"Bifur", @"Bofur", @"Bombur", nil]; 
-    self.listData = array; 
-    [array release]; 
-
+    self.settingsListData = array; 
+    [array release];
+    
+    sectionTitles = [[NSArray arrayWithObjects:@"iReactable", @"Other Options",nil] retain];
 }
 
 
@@ -55,16 +62,28 @@
 
 
 - (void)dealloc {
+    [sectionTitles release];
     [super dealloc];
 }
 
 #pragma mark - 
 #pragma mark Table View Data Source Methods 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [sectionTitles objectAtIndex:section];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView 
     numberOfRowsInSection:(NSInteger)section 
 { 
-    return [self.listData count]; 
-} 
+    return !section ? [self.objectsListData count] : [self.settingsListData count]; 
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView 
        cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 { 
@@ -76,7 +95,7 @@
                      reuseIdentifier: SimpleTableIdentifier] autorelease]; 
     } 
     NSUInteger row = [indexPath row]; 
-    cell.textLabel.text = [listData objectAtIndex:row]; 
+    cell.textLabel.text = ![indexPath section] ? [objectsListData objectAtIndex:row] : [settingsListData objectAtIndex:row]; 
     return cell; 
 }
 
