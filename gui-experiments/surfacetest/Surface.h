@@ -12,6 +12,7 @@
     IBOutlet UIImageView *squarewave;
     IBOutlet UIImageView *vcf;
     IBOutlet UIImageView *lfo;
+    IBOutlet UIImageView *sink;
     
     UIImageView *activeImage;
     NSArray *allImages;

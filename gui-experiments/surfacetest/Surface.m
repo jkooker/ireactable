@@ -21,7 +21,7 @@
 {
     activeImage = nil;
     
-    allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, nil] retain];
+    allImages = [[NSArray arrayWithObjects:squarewave, vcf, lfo, sink, nil] retain];
     for (UIImageView *image in [allImages reverseObjectEnumerator]) {
         [self bringSubviewToFront:image];
     }
@@ -39,6 +39,25 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    CGContextRef contextRef = UIGraphicsGetCurrentContext();
+
+    CGContextSetRGBFillColor(contextRef, 0.8, 0, 0, 1);
+    CGContextSetRGBStrokeColor(contextRef, 1, 0, 0, 1);
+    CGContextSetLineWidth(contextRef, 3.0);
+    
+    // draw from vcf to sink
+    CGContextBeginPath(contextRef);
+    CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
+    CGContextAddLineToPoint(contextRef, sink.center.x, sink.center.y);
+    CGContextDrawPath(contextRef, kCGPathStroke);
+    
+#if 0
+    CGRect aRect = CGRectMake(5, 5, 15, 15);
+    // Draw a circle (filled)
+    CGContextFillEllipseInRect(contextRef, aRect);
+    // Draw a circle (border only)
+    CGContextStrokeEllipseInRect(contextRef, aRect);
+#endif
 }
 
 
@@ -79,6 +98,7 @@
             // if a view was tapped, move it here
             if (activeImage) {
                 activeImage.center = [touch locationInView:self];
+                [self setNeedsDisplay];
             }
         } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchStartLocation) || CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation)) {
             secondaryTouchEndLocation = [touch locationInView:self];

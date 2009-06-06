@@ -20,6 +20,7 @@
 		9B6FBB240FC92A9700B4F66C /* lfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB200FC92A9700B4F66C /* lfo.png */; };
 		9B6FBB250FC92A9700B4F66C /* squarewave.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB210FC92A9700B4F66C /* squarewave.png */; };
 		9B6FBB260FC92A9700B4F66C /* vcf.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B6FBB220FC92A9700B4F66C /* vcf.png */; };
+		9B7B2C830FDA3ED700919734 /* sink.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B7B2C820FDA3ED700919734 /* sink.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		9B6FBB200FC92A9700B4F66C /* lfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lfo.png; sourceTree = "<group>"; };
 		9B6FBB210FC92A9700B4F66C /* squarewave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squarewave.png; sourceTree = "<group>"; };
 		9B6FBB220FC92A9700B4F66C /* vcf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vcf.png; sourceTree = "<group>"; };
+		9B7B2C820FDA3ED700919734 /* sink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sink.png; path = ../images/sink.png; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				9B6FBB1F0FC92A9700B4F66C /* background.png */,
+				9B7B2C820FDA3ED700919734 /* sink.png */,
 				9B6FBB200FC92A9700B4F66C /* lfo.png */,
 				9B6FBB210FC92A9700B4F66C /* squarewave.png */,
 				9B6FBB220FC92A9700B4F66C /* vcf.png */,
@@ -172,6 +175,7 @@
 				9B6FBB240FC92A9700B4F66C /* lfo.png in Resources */,
 				9B6FBB250FC92A9700B4F66C /* squarewave.png in Resources */,
 				9B6FBB260FC92A9700B4F66C /* vcf.png in Resources */,
+				9B7B2C830FDA3ED700919734 /* sink.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
