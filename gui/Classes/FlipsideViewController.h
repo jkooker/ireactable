@@ -17,6 +17,7 @@
     NSArray *tableTitles;
     NSArray *objectNames;
     NSArray *infoStrings;
+    NSArray *configItems;
     
     lo_address t;
 }

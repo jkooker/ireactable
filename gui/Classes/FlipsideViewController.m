@@ -28,6 +28,17 @@ enum tableGroups {
     tableTitles = [[NSArray arrayWithObjects:@"Objects", @"Configuration", @"Testing", @"Information", nil] retain];
     objectNames = [[NSArray arrayWithObjects:@"Square Wave", @"Filter", @"Oscillator", nil] retain];
     infoStrings = [[NSArray arrayWithObjects:@"By John Kooker", @"www.johnkooker.com/blog", nil] retain];
+    
+    configItems = [[NSArray arrayWithObjects:
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            @"IP", @"title",
+            @"0.0.0.0", @"value",
+            nil],
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            @"Port", @"title",
+            @"7000", @"value",
+            nil],
+        nil] retain];
 }
 
 - (void)dealloc {
@@ -35,6 +46,7 @@ enum tableGroups {
     [tableTitles release];
     [objectNames release];
     [infoStrings release];
+    [configItems release];
 }
 
 #pragma mark table view data source
@@ -74,27 +86,46 @@ enum tableGroups {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // dumb cell initialization stuff
-    static NSString *SimpleTableIdentifier = @"SimpleTableIdentifier"; 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: 
-        SimpleTableIdentifier]; 
-    if (cell == nil) { 
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: SimpleTableIdentifier] autorelease]; 
-    } 
+    static NSString *cellIDCheckmark = @"cellIDCheckmark";
+    static NSString *cellIDBlueValue = @"cellIDBlueValue";
+    static NSString *cellIDDefault = @"cellIDDefault";
     
+    UITableViewCell *cell = nil;
+        
     // actually put together the cell
     switch (indexPath.section) {
         case kObjects:
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIDCheckmark];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIDCheckmark] autorelease];
+            }
+            
             cell.textLabel.text = [objectNames objectAtIndex:indexPath.row];
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
             break;
         case kConfiguration:
-            cell.textLabel.text = @"IP";
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIDBlueValue];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier: cellIDBlueValue] autorelease];
+            }
+            
+            cell.textLabel.text = [[configItems objectAtIndex:indexPath.row] valueForKey:@"title"];
+            cell.detailTextLabel.text = [[configItems objectAtIndex:indexPath.row] valueForKey:@"value"];
             break;
         case kTesting:
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIDDefault];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: cellIDDefault] autorelease];
+            }
+
             cell.textLabel.text = @"Send Script";
             break;
         case kInfo:
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIDBlueValue];
+            if (cell == nil) {
+                cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier: cellIDBlueValue] autorelease];
+            }
+
             cell.textLabel.text = [infoStrings objectAtIndex:indexPath.row];
             break;
         default:
@@ -104,6 +135,7 @@ enum tableGroups {
     return cell; 
 
 }
+
 
 #pragma mark table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
