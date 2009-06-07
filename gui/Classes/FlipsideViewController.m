@@ -176,6 +176,39 @@ enum tableGroups {
 - (void)runOSCTestScript
 {
     NSLog(@"running OSC test script.");
+    
+    // init object states
+    lo_send(t, "/ireactable/connect", "sss", "squarewave", "devnull", "signal");
+    lo_send(t, "/ireactable/connect", "sss", "squarewave", "devnull", "signal");
+    lo_send(t, "/ireactable/connect", "sss", "squarewave", "devnull", "signal");
+    lo_send(t, "/ireactable/squarewave", "ff", 440.0f, 0.8f);
+    lo_send(t, "/ireactable/vcf", "ff", 440.0f, 0.5f);
+    lo_send(t, "/ireactable/lfo", "f", 5.0f);
+    
+    // connect squarewave to output
+    lo_send(t, "/ireactable/connect", "sss", "squarewave", "output", "signal");
+    // wait
+    
+    // modify squarewave
+    lo_send(t, "/ireactable/squarewave", "ff", 550.0f, 0.7f);
+    // wait
+    
+    // connect squarewave to vcf signal input
+    lo_send(t, "/ireactable/connect", "sss", "squarewave", "vcf", "signal");
+    
+    // connect vcf to output
+    lo_send(t, "/ireactable/connect", "sss", "vcf", "output", "signal");
+    // wait
+    
+    // modify vcf
+    lo_send(t, "/ireactable/vcf", "ff", 330.0f, 0.5f);
+    // wait
+    
+    // connect lfo to vcf control input
+    lo_send(t, "/ireactable/connect", "sss", "lfo", "vcf", "control");
+    
+    // modify lfo
+    lo_send(t, "/ireactable/lfo", "f", 10.0f);
 }
 
 - (IBAction)done {
