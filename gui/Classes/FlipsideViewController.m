@@ -41,7 +41,7 @@ enum tableGroups {
         nil] retain];
     
     // OSC initializations
-    t = lo_address_new(NULL, "7000");
+    t = lo_address_new("192.168.1.100", "7000");
 }
 
 - (void)dealloc {

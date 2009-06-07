@@ -63,7 +63,6 @@
 {
     // is this a primary or secondary touch?
     for (UITouch *touch in touches) {
-        NSLog(@"hi");
         if (CGPointEqualToPoint(primaryTouchLocation, CGPointNull)) {
             primaryTouchLocation = [touch locationInView:self];
             

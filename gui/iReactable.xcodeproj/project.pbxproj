@@ -23,6 +23,7 @@
 		9B34FBCA0FDB62D70035A751 /* sink.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC60FDB62D70035A751 /* sink.png */; };
 		9B34FBCB0FDB62D70035A751 /* squarewave.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC70FDB62D70035A751 /* squarewave.png */; };
 		9B34FBCC0FDB62D70035A751 /* lfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC80FDB62D70035A751 /* lfo.png */; };
+		9B34FC1D0FDB8CF30035A751 /* liblo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B34FC1C0FDB8CF20035A751 /* liblo.a */; };
 		9BE394E10FDB3D240035D668 /* liblo.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE394E00FDB3D240035D668 /* liblo.dylib */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		9B34FBC60FDB62D70035A751 /* sink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sink.png; path = images/sink.png; sourceTree = "<group>"; };
 		9B34FBC70FDB62D70035A751 /* squarewave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = squarewave.png; path = images/squarewave.png; sourceTree = "<group>"; };
 		9B34FBC80FDB62D70035A751 /* lfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lfo.png; path = images/lfo.png; sourceTree = "<group>"; };
+		9B34FC1C0FDB8CF20035A751 /* liblo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblo.a; sourceTree = "<group>"; };
 		9BE394E00FDB3D240035D668 /* liblo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblo.dylib; path = /usr/local/lib/liblo.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765590DF743DE002DB57D /* CoreGraphics.framework in Frameworks */,
 				9BE394E10FDB3D240035D668 /* liblo.dylib in Frameworks */,
+				9B34FC1D0FDB8CF30035A751 /* liblo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +153,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B34FC1C0FDB8CF20035A751 /* liblo.a */,
 				9BE394E00FDB3D240035D668 /* liblo.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -246,6 +250,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iReactable_Prefix.pch;
 				INFOPLIST_FILE = "iReactable-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = iReactable;
 			};
 			name = Debug;
@@ -258,6 +266,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iReactable_Prefix.pch;
 				INFOPLIST_FILE = "iReactable-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = iReactable;
 			};
 			name = Release;
