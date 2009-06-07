@@ -19,6 +19,8 @@
     NSArray *infoStrings;
     NSArray *configItems;
     
+    NSString *oscAddress;
+    NSString *oscPort;
     lo_address t;
 }
 

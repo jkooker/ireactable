@@ -24,6 +24,9 @@ enum tableGroups {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
     
+    oscAddress = [[NSString stringWithString:@"192.168.1.100"] retain];
+    oscPort = [[NSString stringWithString:@"7000"] retain];
+    
     // set up table data
     tableTitles = [[NSArray arrayWithObjects:@"Objects", @"Configuration", @"Testing", @"Information", nil] retain];
     objectNames = [[NSArray arrayWithObjects:@"Square Wave", @"Filter", @"Oscillator", nil] retain];
@@ -32,16 +35,17 @@ enum tableGroups {
     configItems = [[NSArray arrayWithObjects:
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"IP", @"title",
-            @"0.0.0.0", @"value",
+            oscAddress, @"value",
             nil],
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"Port", @"title",
-            @"7000", @"value",
+            oscPort, @"value",
             nil],
         nil] retain];
     
     // OSC initializations
-    t = lo_address_new("192.168.1.100", "7000");
+    t = lo_address_new([oscAddress cStringUsingEncoding:[NSString defaultCStringEncoding]], [oscPort cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+    lo_send(t, "/hello", ""); // make the connection
 }
 
 - (void)dealloc {
