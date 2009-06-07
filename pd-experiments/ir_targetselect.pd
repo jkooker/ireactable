@@ -1,0 +1,23 @@
+#N canvas 707 22 454 390 10;
+#X obj 52 76 inlet;
+#X obj 51 121 route squarewave vcf-signal vcf-control sink devnull
+;
+#X msg 51 232 set squarewave;
+#X text 43 18 can't think of a better way to turn "squarewave" into
+"set squarewave" right now.;
+#X msg 93 198 set vcf-signal;
+#X msg 162 170 set vcf-control;
+#X msg 245 200 set sink;
+#X msg 303 230 set devnull;
+#X obj 183 349 outlet;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 1 1 4 0;
+#X connect 1 2 5 0;
+#X connect 1 3 6 0;
+#X connect 1 4 7 0;
+#X connect 2 0 8 0;
+#X connect 4 0 8 0;
+#X connect 5 0 8 0;
+#X connect 6 0 8 0;
+#X connect 7 0 8 0;

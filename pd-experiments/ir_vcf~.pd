@@ -19,7 +19,7 @@
 #X obj 42 103 catch~ vcf-signal;
 #X obj 81 130 inlet;
 #X obj 104 179 catch~ vcf-control;
-#X msg 191 426 set \$0;
+#X obj 188 427 ir_targetselect;
 #X connect 0 0 6 0;
 #X connect 0 0 8 0;
 #X connect 3 0 5 0;
