@@ -13,6 +13,9 @@
 
 @synthesize oscAddress;
 @synthesize oscPort;
+@synthesize squarewave;
+@synthesize vcf;
+@synthesize lfo;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
 

@@ -8,16 +8,26 @@
 
 #import <Foundation/Foundation.h>
 #import "lo/lo.h"
+#import "ReactObject.h"
 
 @interface ReactController : NSObject {
     NSString *oscAddress;
     NSString *oscPort;
-
     lo_address t;
+    
+    ReactObject *squarewave;
+    ReactObject *vcf;
+    ReactObject *lfo;
+    //ReactObject *sink;
+    
+    NSArray *reactObjects;
 }
 
 @property (nonatomic, copy) NSString *oscAddress;
 @property (nonatomic, copy) NSString *oscPort;
+@property (readonly) ReactObject *squarewave;
+@property (readonly) ReactObject *vcf;
+@property (readonly) ReactObject *lfo;
 
 + (ReactController *)sharedReactController;
 
