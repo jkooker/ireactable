@@ -11,9 +11,6 @@
 #define CGPointNull CGPointMake(-1, -1)
 #define TRACE NSLog(@"%@ %s", [self class], _cmd)
 
-#define GROW_ANIMATION_DURATION_SECONDS 0.15    // Determines how fast a piece size grows when it is moved.
-#define SHRINK_ANIMATION_DURATION_SECONDS 0.15  // Determines how fast a piece size shrinks when a piece stops moving.
-
 CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
     return atan2f(first.y - second.y, first.x - second.x);
 }
@@ -144,6 +141,10 @@ CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
 }
 
 #pragma mark Animations
+#define GROW_ANIMATION_DURATION_SECONDS 0.15    // Determines how fast a piece size grows when it is moved.
+#define SHRINK_ANIMATION_DURATION_SECONDS 0.15  // Determines how fast a piece size shrinks when a piece stops moving.
+
+static CGFloat kScaleFactor = 1.3;
 
 - (void)activateImage:(UIImageView*)image
 {
@@ -151,7 +152,7 @@ CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
 
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
-	image.transform = CGAffineTransformMakeScale(1.2, 1.2);
+	image.transform = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
     image.center = primaryTouchLocation;
     [self setNeedsDisplay];
 	[UIView commitAnimations];
@@ -171,9 +172,9 @@ CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
 - (void)updateRotation
 {
     // this should be replaced by real angle calculations
-    CGFloat angle = (secondaryTouchStartLocation.y - secondaryTouchEndLocation.y)/15.0;
+    CGFloat angle = angleBetweenPoints(primaryTouchLocation, secondaryTouchEndLocation) - angleBetweenPoints(primaryTouchLocation, secondaryTouchStartLocation);
     
-    CGAffineTransform t = CGAffineTransformMakeScale(1.2, 1.2);
+    CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
     activeImage.transform = CGAffineTransformRotate(t, angle);
 }
 
