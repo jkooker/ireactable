@@ -9,7 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @interface MainView : UIView {
-
+    IBOutlet UIImageView *squarewave;
+    IBOutlet UIImageView *vcf;
+    IBOutlet UIImageView *lfo;
+    IBOutlet UIImageView *sink;
+    
+    UIImageView *activeImage;
+    NSArray *allImages;
+    
+    CGPoint primaryTouchLocation;
+    CGPoint secondaryTouchStartLocation;
+    CGPoint secondaryTouchEndLocation;
 }
+
+- (void)activateImage:(UIImageView*)image;
+- (void)deactivateImage;
+- (void)updateRotation;
 
 @end
