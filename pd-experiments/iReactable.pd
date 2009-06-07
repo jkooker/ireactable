@@ -5,7 +5,7 @@
 #X obj 243 270 ir_vcf~;
 #X obj 420 261 ir_lfo~;
 #X text 390 382 goes nowhere;
-#N canvas 191 144 745 475 oscrouting 1;
+#N canvas 191 144 745 475 oscrouting 0;
 #X text 21 21 receives and prints OSC messages from the iPhone simulator
 ;
 #X obj 40 148 OSCroute /ireactable;
@@ -22,7 +22,8 @@
 #X obj 388 290 send lfo-params;
 #X msg 274 57 /ireactable/connect squarewave vcf-signal;
 #X msg 274 84 /ireactable/connect vcf sink;
-#X msg 274 111 /ireactable/connect lfo squarewave;
+#X msg 274 111 /ireactable/connect lfo vcf-control;
+#X msg 274 135 /ireactable/connect lfo squarewave;
 #X connect 1 0 3 0;
 #X connect 1 1 2 0;
 #X connect 3 0 4 0;
@@ -37,6 +38,7 @@
 #X connect 13 0 1 0;
 #X connect 14 0 1 0;
 #X connect 15 0 1 0;
+#X connect 16 0 1 0;
 #X restore 59 83 pd oscrouting;
 #X obj 56 180 receive squarewave-params;
 #X obj 57 224 unpack f f;
@@ -48,8 +50,8 @@
 #X obj 126 106 send lfo-target;
 #X msg 32 70 devnull;
 #X obj 32 9 inlet;
-#X msg 266 89 \; squarewave-params 440 0.8 \; vcf-params 330 0.9 \;
-lfo-params 5 50;
+#X msg 266 89 \; squarewave-params 110 0.8 \; vcf-params 80 0.95 \;
+lfo-params 3 60;
 #X connect 3 0 0 0;
 #X connect 3 0 1 0;
 #X connect 3 0 2 0;
