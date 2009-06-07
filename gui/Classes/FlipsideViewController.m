@@ -27,7 +27,7 @@ enum tableGroups {
     // set up table data
     tableTitles = [[NSArray arrayWithObjects:@"Objects", @"Configuration", @"Testing", @"Information", nil] retain];
     objectNames = [[NSArray arrayWithObjects:@"Square Wave", @"Filter", @"Oscillator", nil] retain];
-    infoStrings = [[NSArray arrayWithObjects:@"By John Kooker", @"www.johnkooker.com/blog", nil] retain];
+    infoStrings = [[NSArray arrayWithObjects:@"UCSD CSE 237D Project", @"By John Kooker", @"www.johnkooker.com/blog", nil] retain];
     
     configItems = [[NSArray arrayWithObjects:
         [NSDictionary dictionaryWithObjectsAndKeys:
@@ -39,6 +39,9 @@ enum tableGroups {
             @"7000", @"value",
             nil],
         nil] retain];
+    
+    // OSC initializations
+    t = lo_address_new(NULL, "7000");
 }
 
 - (void)dealloc {
@@ -127,6 +130,7 @@ enum tableGroups {
             }
 
             cell.textLabel.text = [infoStrings objectAtIndex:indexPath.row];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             break;
         default:
             break;
@@ -138,9 +142,18 @@ enum tableGroups {
 
 
 #pragma mark table view delegate
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Disable for certain sections
+    if (indexPath.section == kInfo || indexPath.section == kConfiguration)
+		return nil;
+
+	return indexPath;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"selected index path %@", indexPath);
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark other
