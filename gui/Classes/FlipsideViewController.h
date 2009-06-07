@@ -24,6 +24,7 @@
 
 @property (nonatomic, assign) id <FlipsideViewControllerDelegate> delegate;
 - (IBAction)done;
+- (void)runOSCTestScript;
 
 @end
 

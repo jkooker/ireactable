@@ -152,11 +152,31 @@ enum tableGroups {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"selected index path %@", indexPath);
+    switch (indexPath.section) {
+        case kObjects:
+            // flip on and off the checkmarks
+            if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
+                [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+            } else {
+                [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            }
+            break;
+        case kTesting:
+            [self runOSCTestScript];
+            break;
+        default:
+            break;
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark other
+
+- (void)runOSCTestScript
+{
+    NSLog(@"running OSC test script.");
+}
 
 - (IBAction)done {
 	[self.delegate flipsideViewControllerDidFinish:self];	
