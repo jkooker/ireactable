@@ -24,6 +24,7 @@
 		9B34FBCB0FDB62D70035A751 /* squarewave.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC70FDB62D70035A751 /* squarewave.png */; };
 		9B34FBCC0FDB62D70035A751 /* lfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC80FDB62D70035A751 /* lfo.png */; };
 		9B34FC1D0FDB8CF30035A751 /* liblo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B34FC1C0FDB8CF20035A751 /* liblo.a */; };
+		9BA61B620FDBD024002B6B02 /* ReactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA61B610FDBD024002B6B02 /* ReactController.m */; };
 		9BE394E10FDB3D240035D668 /* liblo.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE394E00FDB3D240035D668 /* liblo.dylib */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,9 @@
 		9B34FBC70FDB62D70035A751 /* squarewave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = squarewave.png; path = images/squarewave.png; sourceTree = "<group>"; };
 		9B34FBC80FDB62D70035A751 /* lfo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lfo.png; path = images/lfo.png; sourceTree = "<group>"; };
 		9B34FC1C0FDB8CF20035A751 /* liblo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = liblo.a; sourceTree = "<group>"; };
+		9BA61B5F0FDBCE92002B6B02 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = ../SynthesizeSingleton.h; sourceTree = "<group>"; };
+		9BA61B600FDBD024002B6B02 /* ReactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactController.h; sourceTree = "<group>"; };
+		9BA61B610FDBD024002B6B02 /* ReactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactController.m; sourceTree = "<group>"; };
 		9BE394E00FDB3D240035D668 /* liblo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblo.dylib; path = /usr/local/lib/liblo.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -72,13 +76,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Application Delegate */ = {
+		080E96DDFE201D6D7F000001 /* Application-Level */ = {
 			isa = PBXGroup;
 			children = (
 				1D3623240D0F684500981E51 /* iReactableAppDelegate.h */,
 				1D3623250D0F684500981E51 /* iReactableAppDelegate.m */,
+				9BA61B5F0FDBCE92002B6B02 /* SynthesizeSingleton.h */,
+				9BA61B600FDBD024002B6B02 /* ReactController.h */,
+				9BA61B610FDBD024002B6B02 /* ReactController.m */,
 			);
-			name = "Application Delegate";
+			name = "Application-Level";
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -117,7 +124,7 @@
 			children = (
 				289233A00DB2D0730083E9F9 /* Main View */,
 				281C6CD70DB2D82200F60ACC /* Flipside View */,
-				080E96DDFE201D6D7F000001 /* Application Delegate */,
+				080E96DDFE201D6D7F000001 /* Application-Level */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -234,6 +241,7 @@
 				289233A70DB2D0840083E9F9 /* MainView.m in Sources */,
 				289233AE0DB2D0DB0083E9F9 /* MainViewController.m in Sources */,
 				289233B00DB2D0DB0083E9F9 /* FlipsideViewController.m in Sources */,
+				9BA61B620FDBD024002B6B02 /* ReactController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

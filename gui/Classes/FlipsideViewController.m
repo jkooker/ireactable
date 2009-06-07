@@ -8,7 +8,6 @@
 
 #import "FlipsideViewController.h"
 
-
 @implementation FlipsideViewController
 
 @synthesize delegate;
@@ -24,8 +23,8 @@ enum tableGroups {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
     
-    oscAddress = [[NSString stringWithString:@"192.168.1.100"] retain];
-    oscPort = [[NSString stringWithString:@"7000"] retain];
+    reactController = [ReactController sharedReactController];
+    t = [reactController loAddress];
     
     // set up table data
     tableTitles = [[NSArray arrayWithObjects:@"Objects", @"Configuration", @"Testing", @"Information", nil] retain];
@@ -35,17 +34,13 @@ enum tableGroups {
     configItems = [[NSArray arrayWithObjects:
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"IP", @"title",
-            oscAddress, @"value",
+            reactController.oscAddress, @"value",
             nil],
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"Port", @"title",
-            oscPort, @"value",
+            reactController.oscPort, @"value",
             nil],
         nil] retain];
-    
-    // OSC initializations
-    t = lo_address_new([oscAddress cStringUsingEncoding:[NSString defaultCStringEncoding]], [oscPort cStringUsingEncoding:[NSString defaultCStringEncoding]]);
-    lo_send(t, "/hello", ""); // make the connection
 }
 
 - (void)dealloc {

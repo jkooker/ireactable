@@ -7,6 +7,7 @@
 //
 
 #import "lo/lo.h"
+#import "ReactController.h"
 
 @protocol FlipsideViewControllerDelegate;
 
@@ -19,8 +20,7 @@
     NSArray *infoStrings;
     NSArray *configItems;
     
-    NSString *oscAddress;
-    NSString *oscPort;
+    ReactController *reactController;
     lo_address t;
 }
 
