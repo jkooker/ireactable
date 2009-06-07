@@ -15,6 +15,21 @@ CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
     return atan2f(first.y - second.y, first.x - second.x);
 }
 
+// converts to an angle between 0 and 2pi
+CGFloat fixAngle(CGFloat angle) {
+    CGFloat fixedangle = fmodf(angle, 2*M_PI);
+    if (fixedangle < 0) fixedangle += 2*M_PI;
+    
+    return fixedangle;
+}
+
+CGFloat convertAngleToControlValue(CGFloat angle) {
+    CGFloat x = (fixAngle(angle)/(2*M_PI)) - 0.5;
+    if (x<0) x += 1;
+    
+    return x;
+}
+
 @implementation MainView
 
 - (void)awakeFromNib {
@@ -176,6 +191,8 @@ static CGFloat kScaleFactor = 1.3;
     
     CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
     activeImage.transform = CGAffineTransformRotate(t, angle);
+
+    NSLog(@"angle: %.2f, control: %.2f", fixAngle(angle), convertAngleToControlValue(angle));
 }
 
 @end
