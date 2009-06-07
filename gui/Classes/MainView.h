@@ -25,5 +25,6 @@
 - (void)activateImage:(UIImageView*)image;
 - (void)deactivateImage;
 - (void)updateRotation;
+- (BOOL)checkProximityOf:(UIImageView*)first to:(UIImageView*)second;
 
 @end

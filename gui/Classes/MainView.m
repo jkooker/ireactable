@@ -14,6 +14,10 @@
 #define GROW_ANIMATION_DURATION_SECONDS 0.15    // Determines how fast a piece size grows when it is moved.
 #define SHRINK_ANIMATION_DURATION_SECONDS 0.15  // Determines how fast a piece size shrinks when a piece stops moving.
 
+CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
+    return atan2f(first.y - second.y, first.x - second.x);
+}
+
 @implementation MainView
 
 - (void)awakeFromNib {
@@ -39,19 +43,34 @@
     
     CGContextBeginPath(contextRef);
 
-    // draw from vcf to sink
-    CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
-    CGContextAddLineToPoint(contextRef, sink.center.x, sink.center.y);
-    // draw from squarewave to vcf
-    CGContextMoveToPoint(contextRef, squarewave.center.x, squarewave.center.y);
-    CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
-    // draw from lfo to vcf
-    CGContextMoveToPoint(contextRef, lfo.center.x, lfo.center.y);
-    CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
-
+    if ([self checkProximityOf:vcf to:sink]) {
+        // draw from vcf to sink
+        CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
+        CGContextAddLineToPoint(contextRef, sink.center.x, sink.center.y);
+    }
+    if ([self checkProximityOf:squarewave to:vcf]) {
+        // draw from squarewave to vcf
+        CGContextMoveToPoint(contextRef, squarewave.center.x, squarewave.center.y);
+        CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+    }
+    if ([self checkProximityOf:lfo to:vcf]) {
+        // draw from lfo to vcf
+        CGContextMoveToPoint(contextRef, lfo.center.x, lfo.center.y);
+        CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+    }
+    
     CGContextDrawPath(contextRef, kCGPathStroke);
 }
 
+- (BOOL)checkProximityOf:(UIImageView*)first to:(UIImageView*)second {
+    CGFloat dx = first.center.x - second.center.x;
+    CGFloat dy = first.center.y - second.center.y;
+    
+    CGFloat distance = sqrtf(dx*dx + dy*dy);
+    static CGFloat kMinDistance = 150;
+    if (distance <= kMinDistance) return YES;
+    else return NO;
+}
 
 - (void)dealloc {
     [allImages release];
