@@ -25,6 +25,7 @@
 		9B34FBCC0FDB62D70035A751 /* lfo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9B34FBC80FDB62D70035A751 /* lfo.png */; };
 		9B34FC1D0FDB8CF30035A751 /* liblo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B34FC1C0FDB8CF20035A751 /* liblo.a */; };
 		9BA61B620FDBD024002B6B02 /* ReactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA61B610FDBD024002B6B02 /* ReactController.m */; };
+		9BD833470FDBE75F00760DEA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD833460FDBE75F00760DEA /* icon.png */; };
 		9BE394E10FDB3D240035D668 /* liblo.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE394E00FDB3D240035D668 /* liblo.dylib */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		9BA61B5F0FDBCE92002B6B02 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SynthesizeSingleton.h; path = ../SynthesizeSingleton.h; sourceTree = "<group>"; };
 		9BA61B600FDBD024002B6B02 /* ReactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactController.h; sourceTree = "<group>"; };
 		9BA61B610FDBD024002B6B02 /* ReactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactController.m; sourceTree = "<group>"; };
+		9BD833460FDBE75F00760DEA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = images/icon.png; sourceTree = "<group>"; };
 		9BE394E00FDB3D240035D668 /* liblo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblo.dylib; path = /usr/local/lib/liblo.dylib; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -145,6 +147,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9BD833460FDBE75F00760DEA /* icon.png */,
 				9B34FBC80FDB62D70035A751 /* lfo.png */,
 				9B34FBC60FDB62D70035A751 /* sink.png */,
 				9B34FBC70FDB62D70035A751 /* squarewave.png */,
@@ -225,6 +228,7 @@
 				9B34FBCA0FDB62D70035A751 /* sink.png in Resources */,
 				9B34FBCB0FDB62D70035A751 /* squarewave.png in Resources */,
 				9B34FBCC0FDB62D70035A751 /* lfo.png in Resources */,
+				9BD833470FDBE75F00760DEA /* icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
