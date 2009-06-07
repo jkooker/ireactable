@@ -11,8 +11,13 @@
 @protocol FlipsideViewControllerDelegate;
 
 
-@interface FlipsideViewController : UIViewController {
+@interface FlipsideViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	id <FlipsideViewControllerDelegate> delegate;
+    
+    NSArray *tableTitles;
+    NSArray *objectNames;
+    NSArray *infoStrings;
+    
     lo_address t;
 }
 
