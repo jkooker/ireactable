@@ -48,7 +48,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
     return t;
 }
 
-- (void)sendPeriodicUpdates { TRACE;
+- (void)sendPeriodicUpdates {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     BOOL sendOSC = YES;
     // send all state information every 1 second
@@ -60,7 +60,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
         lo_send(t, "/ireactable/vcf", "ff", [vcf param1], [vcf param2]);
         lo_send(t, "/ireactable/lfo", "ff", [lfo param2], [lfo param2]);
         
-        [NSThread sleepForTimeInterval:1.0];
+        [NSThread sleepForTimeInterval:0.10];
     }
     [pool release];
 }

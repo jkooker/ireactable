@@ -62,33 +62,32 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     
     CGContextBeginPath(contextRef);
 
-    if ([self checkProximityOf:vcf to:sink]) {
-        // draw from vcf to sink
+    if (vcf.isConnected) {
+        // draw from vcf to its destination
         CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
-        CGContextAddLineToPoint(contextRef, sink.center.x, sink.center.y);
+        CGContextAddLineToPoint(contextRef, vcf.target.center.x, vcf.target.center.y);
     }
-    if ([self checkProximityOf:squarewave to:vcf]) {
-        // draw from squarewave to vcf
+    if (squarewave.isConnected) {
+        // draw from squarewave to its destination
         CGContextMoveToPoint(contextRef, squarewave.center.x, squarewave.center.y);
-        CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+        CGContextAddLineToPoint(contextRef, squarewave.target.center.x, squarewave.target.center.y);
     }
-    if ([self checkProximityOf:lfo to:vcf]) {
-        // draw from lfo to vcf
+    if (lfo.isConnected) {
+        // draw from lfo to its destination
         CGContextMoveToPoint(contextRef, lfo.center.x, lfo.center.y);
-        CGContextAddLineToPoint(contextRef, vcf.center.x, vcf.center.y);
+        CGContextAddLineToPoint(contextRef, lfo.target.center.x, lfo.target.center.y);
     }
     
     CGContextDrawPath(contextRef, kCGPathStroke);
 }
 
-- (BOOL)checkProximityOf:(UIImageView*)first to:(UIImageView*)second {
+- (CGFloat)distanceFrom:(UIImageView*)first to:(UIImageView*)second {
     CGFloat dx = first.center.x - second.center.x;
     CGFloat dy = first.center.y - second.center.y;
     
     CGFloat distance = sqrtf(dx*dx + dy*dy);
-    static CGFloat kMinDistance = 150;
-    if (distance <= kMinDistance) return YES;
-    else return NO;
+    
+    return distance;
 }
 
 - (void)dealloc {
@@ -108,6 +107,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             for (ReactImageView *anImage in allImages) {
                 if (CGRectContainsPoint([anImage frame], primaryTouchLocation)) {
                     [self activateImage:anImage];
+                    [self updateConnectionsFrom:anImage];
                     break; // don't try to activate any others
                 }
             }
@@ -128,6 +128,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             // if a view was tapped, move it here
             if (activeImage) {
                 activeImage.center = [touch locationInView:self];
+                [self updateConnectionsFrom:activeImage];
                 [self setNeedsDisplay];
             }
         } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchStartLocation) || CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation)) {
@@ -205,8 +206,90 @@ static CGFloat kScaleFactor = 1.3;
     activeImage.transform = CGAffineTransformRotate(t, angle + activeImage.angle);
 
     currentRotation = angle;
-    NSLog(@"angle control: %.2f", convertAngleToControlValue(angle + activeImage.angle));
+    //NSLog(@"angle control: %.2f", convertAngleToControlValue(angle + activeImage.angle));
     activeImage.reactObject.param1 = convertAngleToControlValue(angle + activeImage.angle);
 }
+
+- (void)updateConnectionsFrom:(ReactImageView*)image
+{
+    static CGFloat kMaxPieceDistance = 150;
+    static CGFloat kMaxSinkDistance = 100;
+
+    if (image == squarewave) {
+        // squarewave can connect to vcf, sink, and devnull
+        CGFloat d2vcf = [self distanceFrom:squarewave to:vcf];
+        CGFloat d2sink = [self distanceFrom:squarewave to:sink];
+        
+        if (d2sink <= kMaxSinkDistance) {
+            // make sure vcf isn't closer
+            if (d2sink <= d2vcf) {
+                // connect to sink
+                image.target = sink;
+                image.isConnected = YES;
+                image.reactObject.targetName = @"sink";
+            } else {
+                // connect to vcf
+                image.target = vcf;
+                image.isConnected = YES;
+                image.reactObject.targetName = @"vcf-signal";
+            }
+        } else if (d2vcf <= kMaxPieceDistance) {
+            // connect to vcf
+            image.target = vcf;
+            image.isConnected = YES;
+            image.reactObject.targetName = @"vcf-signal";
+        } else {
+            // disconnect
+            image.target = nil;
+            image.isConnected = NO;
+            image.reactObject.targetName = @"devnull";
+        }
+    } else if (image == vcf) {
+        // vcf can connect to sink and devnull
+        CGFloat d2sink = [self distanceFrom:vcf to:sink];
+        
+        if (d2sink <= kMaxSinkDistance) {
+            // connect to sink
+            image.target = sink;
+            image.isConnected = YES;
+            image.reactObject.targetName = @"sink";
+        } else {
+            // disconnect
+            image.target = nil;
+            image.isConnected = NO;
+            image.reactObject.targetName = @"devnull";
+        }
+    } else if (image == lfo) {
+        // lfo can connect to squarewave, vcf, and devnull
+        CGFloat d2squarewave = [self distanceFrom:lfo to:squarewave];
+        CGFloat d2vcf = [self distanceFrom:lfo to:vcf];
+        
+        if (d2squarewave <= kMaxPieceDistance) {
+            // make sure vcf isn't closer
+            if (d2squarewave <= d2vcf) {
+                // connect to squarewave
+                image.target = squarewave;
+                image.isConnected = YES;
+                image.reactObject.targetName = @"squarewave";
+            } else {
+                // connect to vcf
+                image.target = vcf;
+                image.isConnected = YES;
+                image.reactObject.targetName = @"vcf-control";
+            }
+        } else if (d2vcf <= kMaxPieceDistance) {
+            // connect to vcf
+            image.target = vcf;
+            image.isConnected = YES;
+            image.reactObject.targetName = @"vcf-control";
+        } else {
+            // disconnect
+            image.target = nil;
+            image.isConnected = NO;
+            image.reactObject.targetName = @"devnull";
+        }
+    }
+}
+
 
 @end

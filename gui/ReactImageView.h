@@ -12,9 +12,13 @@
 @interface ReactImageView : UIImageView {
     ReactObject *reactObject;
     CGFloat angle;
+    BOOL isConnected;
+    UIImageView *target;
 }
 
 @property (retain, readwrite) ReactObject *reactObject;
 @property CGFloat angle;
+@property BOOL isConnected;
+@property (retain, readwrite) UIImageView *target;
 
 @end
