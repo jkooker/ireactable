@@ -1,11 +1,11 @@
-#N canvas 411 165 590 487 10;
+#N canvas 158 217 590 487 10;
 #X obj 58 266 ir_squarewave~;
 #X obj 392 363 catch~ devnull;
 #X obj 216 373 ir_sink~;
 #X obj 243 270 ir_vcf~;
 #X obj 420 261 ir_lfo~;
 #X text 390 382 goes nowhere;
-#N canvas 191 144 745 475 oscrouting 0;
+#N canvas 191 144 745 475 oscrouting 1;
 #X text 21 21 receives and prints OSC messages from the iPhone simulator
 ;
 #X obj 40 148 OSCroute /ireactable;
@@ -24,6 +24,7 @@
 #X msg 274 84 /ireactable/connect vcf sink;
 #X msg 274 111 /ireactable/connect lfo vcf-control;
 #X msg 274 135 /ireactable/connect lfo squarewave;
+#X obj 81 69 print osc;
 #X connect 1 0 3 0;
 #X connect 1 1 2 0;
 #X connect 3 0 4 0;
@@ -32,6 +33,7 @@
 #X connect 4 1 8 0;
 #X connect 4 2 9 0;
 #X connect 5 0 1 0;
+#X connect 5 0 17 0;
 #X connect 7 0 10 0;
 #X connect 7 1 11 0;
 #X connect 7 2 12 0;
@@ -44,7 +46,7 @@
 #X obj 57 224 unpack f f;
 #X obj 48 378 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#N canvas 490 22 450 300 resetall 0;
+#N canvas 252 22 450 300 resetall 0;
 #X obj 31 193 send squarewave-target;
 #X obj 82 149 send vcf-target;
 #X obj 126 106 send lfo-target;
@@ -63,6 +65,66 @@ lfo-params 3 60;
 #X obj 240 181 receive vcf-params;
 #X obj 420 180 receive lfo-params;
 #X obj 420 224 unpack f f;
+#N canvas 633 22 586 409 tester 1;
+#X msg 40 32 \; squarewave-target devnull;
+#X msg 38 59 \; squarewave-target sink;
+#X msg 40 85 \; squarewave-target lfo;
+#X msg 232 31 \; vcf-target devnull;
+#X msg 233 61 \; vcf-target sink;
+#X msg 395 62 \; lfo-target vcf;
+#X msg 393 32 \; lfo-target devnull;
+#X obj 34 322 pack f f;
+#X obj 79 294 t b f;
+#X obj 34 135 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X floatatom 34 276 5 0 0 0 - - -;
+#X floatatom 78 272 5 0 0 0 - - -;
+#X obj 77 132 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X msg 469 151 \; sliders 0.5;
+#X obj 34 350 s squarewave-params;
+#X obj 179 320 pack f f;
+#X obj 224 292 t b f;
+#X obj 179 133 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X floatatom 179 274 5 0 0 0 - - -;
+#X floatatom 223 270 5 0 0 0 - - -;
+#X obj 222 130 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X obj 179 348 s vcf-params;
+#X obj 312 319 pack f f;
+#X obj 357 291 t b f;
+#X obj 312 132 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X floatatom 312 273 5 0 0 0 - - -;
+#X floatatom 356 269 5 0 0 0 - - -;
+#X obj 355 129 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
+-1 -1 6350 1;
+#X obj 312 347 s lfo-params;
+#X obj 467 120 loadbang;
+#X connect 7 0 14 0;
+#X connect 8 0 7 0;
+#X connect 8 1 7 1;
+#X connect 9 0 10 0;
+#X connect 10 0 7 0;
+#X connect 11 0 8 0;
+#X connect 12 0 11 0;
+#X connect 15 0 21 0;
+#X connect 16 0 15 0;
+#X connect 16 1 15 1;
+#X connect 17 0 18 0;
+#X connect 18 0 15 0;
+#X connect 19 0 16 0;
+#X connect 20 0 19 0;
+#X connect 22 0 28 0;
+#X connect 23 0 22 0;
+#X connect 23 1 22 1;
+#X connect 24 0 25 0;
+#X connect 25 0 22 0;
+#X connect 26 0 23 0;
+#X connect 27 0 26 0;
+#X connect 29 0 13 0;
+#X restore 360 86 pd tester;
 #X connect 7 0 8 0;
 #X connect 8 0 0 0;
 #X connect 8 1 0 1;
