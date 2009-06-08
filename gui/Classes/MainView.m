@@ -149,6 +149,8 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             primaryTouchLocation = CGPointNull;
         } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation) || CGPointEqualToPoint([touch locationInView:self], secondaryTouchEndLocation)) {
             // secondary touch ended
+            activeImage.angle += currentRotation;
+            currentRotation = 0;
             secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
             secondaryTouchStartAngle = 0;
         }
@@ -189,11 +191,9 @@ static CGFloat kScaleFactor = 1.3;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:SHRINK_ANIMATION_DURATION_SECONDS];
 	// Set the transform back to the identity, thus undoing the previous scaling effect.
-    activeImage.angle += currentRotation;
 	activeImage.transform = CGAffineTransformMakeRotation(activeImage.angle);
 	[UIView commitAnimations];
     
-    currentRotation = 0;
     activeImage = nil;
 }
 
