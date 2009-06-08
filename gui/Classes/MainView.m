@@ -41,7 +41,9 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
         [self bringSubviewToFront:image];
     }
     
-    primaryTouchLocation = secondaryTouchStartLocation = CGPointNull;
+    primaryTouchLocation = secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
+    secondaryTouchStartAngle = 0;
+    
     react = [ReactController sharedReactController];
     
     squarewave.reactObject = [react squarewave];
@@ -110,6 +112,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             }
         } else if (CGPointEqualToPoint(secondaryTouchStartLocation, CGPointNull)) {
             secondaryTouchStartLocation = [touch locationInView:self];
+            secondaryTouchStartAngle = angleBetweenPoints(primaryTouchLocation, secondaryTouchStartLocation);
         }
     }
 }
@@ -146,6 +149,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
         } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation) || CGPointEqualToPoint([touch locationInView:self], secondaryTouchEndLocation)) {
             // secondary touch ended
             secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
+            secondaryTouchStartAngle = 0;
         }
     }
 }
@@ -157,6 +161,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     
     // reset touch locations
     primaryTouchLocation = secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
+    secondaryTouchStartAngle = 0;
 }
 
 #pragma mark Animations
@@ -190,8 +195,7 @@ static CGFloat kScaleFactor = 1.3;
 
 - (void)updateRotation
 {
-    // this should be replaced by real angle calculations
-    CGFloat angle = angleBetweenPoints(primaryTouchLocation, secondaryTouchEndLocation) - angleBetweenPoints(primaryTouchLocation, secondaryTouchStartLocation);
+    CGFloat angle = angleBetweenPoints(primaryTouchLocation, secondaryTouchEndLocation) - secondaryTouchStartAngle;
     
     CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
     activeImage.transform = CGAffineTransformRotate(t, angle);
