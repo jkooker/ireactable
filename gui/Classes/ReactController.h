@@ -20,7 +20,6 @@
     ReactObject *squarewave;
     ReactObject *vcf;
     ReactObject *lfo;
-    //ReactObject *sink;
     
     NSArray *reactObjects;
 }

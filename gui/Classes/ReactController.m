@@ -58,7 +58,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
         lo_send(t, "/ireactable/connect", "ss", "vcf", [[vcf targetName] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
         lo_send(t, "/ireactable/squarewave", "ff", [squarewave param1], [squarewave param2]);
         lo_send(t, "/ireactable/vcf", "ff", [vcf param1], [vcf param2]);
-        lo_send(t, "/ireactable/lfo", "ff", [lfo param2], [lfo param2]);
+        lo_send(t, "/ireactable/lfo", "ff", [lfo param1], [lfo param2]);
         
         [NSThread sleepForTimeInterval:0.10];
     }
