@@ -14,7 +14,6 @@
 @synthesize targetName;
 @synthesize param1;
 @synthesize param2;
-@synthesize isEnabled;
 
 - (id)init
 {
@@ -23,7 +22,6 @@
         self.targetName = @"devnull";
         self.param1 = 0.5f;
         self.param2 = 0.5f;
-        self.isEnabled = NO;
 	}
 	return self;
 }

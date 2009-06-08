@@ -16,7 +16,6 @@
 @synthesize squarewave;
 @synthesize vcf;
 @synthesize lfo;
-@synthesize reactObjects;
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
 
@@ -35,8 +34,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
         vcf = [[ReactObject alloc] init];
         lfo = [[ReactObject alloc] init];
         
-        reactObjects = [[NSArray alloc] initWithObjects:squarewave,vcf,lfo,nil];
-        
         [NSThread detachNewThreadSelector:@selector(sendPeriodicUpdates) toTarget:self withObject:nil];
 	}
 	return self;
@@ -44,10 +41,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
 
 - (void)dealloc {
     lo_address_free(t);
-    [squarewave release];
-    [vcf release];
-    [lfo release];
-    [reactObjects release];
     [super dealloc];
 }
 

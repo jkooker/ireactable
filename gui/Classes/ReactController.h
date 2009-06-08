@@ -20,6 +20,7 @@
     ReactObject *squarewave;
     ReactObject *vcf;
     ReactObject *lfo;
+    //ReactObject *sink;
     
     NSArray *reactObjects;
 }
@@ -29,7 +30,6 @@
 @property (readonly) ReactObject *squarewave;
 @property (readonly) ReactObject *vcf;
 @property (readonly) ReactObject *lfo;
-@property (readonly) NSArray *reactObjects;
 
 + (ReactController *)sharedReactController;
 

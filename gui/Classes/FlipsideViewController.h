@@ -20,7 +20,7 @@
     NSArray *infoStrings;
     NSArray *configItems;
     
-    ReactController *react;
+    ReactController *reactController;
     lo_address t;
 }
 

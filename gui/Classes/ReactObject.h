@@ -13,12 +13,10 @@
     CGFloat param1;
     CGFloat param2;
     NSString *targetName;
-    BOOL isEnabled;
 }
 
 @property (copy,readwrite) NSString *targetName;
 @property CGFloat param1;
 @property CGFloat param2;
-@property BOOL isEnabled;
 
 @end
