@@ -102,7 +102,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             primaryTouchLocation = [touch locationInView:self];
             
             // figure out which object got tapped
-            for (UIImageView *anImage in allImages) {
+            for (ReactImageView *anImage in allImages) {
                 if (CGRectContainsPoint([anImage frame], primaryTouchLocation)) {
                     [self activateImage:anImage];
                     break; // don't try to activate any others
@@ -165,7 +165,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
 
 static CGFloat kScaleFactor = 1.3;
 
-- (void)activateImage:(UIImageView*)image
+- (void)activateImage:(ReactImageView*)image
 {
     activeImage = image;
 
@@ -196,7 +196,9 @@ static CGFloat kScaleFactor = 1.3;
     CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
     activeImage.transform = CGAffineTransformRotate(t, angle);
 
-    NSLog(@"angle: %.2f, control: %.2f", fixAngle(angle), convertAngleToControlValue(angle));
+    NSLog(@"angle control: %.2f", convertAngleToControlValue(angle));
+    
+    activeImage.reactObject.param1 = convertAngleToControlValue(angle);
 }
 
 @end

@@ -16,7 +16,7 @@
     IBOutlet ReactImageView *lfo;
     IBOutlet UIImageView *sink;
     
-    UIImageView *activeImage;
+    ReactImageView *activeImage;
     NSArray *allImages;
     
     CGPoint primaryTouchLocation;
@@ -26,7 +26,7 @@
     ReactController *react;
 }
 
-- (void)activateImage:(UIImageView*)image;
+- (void)activateImage:(ReactImageView*)image;
 - (void)deactivateImage;
 - (void)updateRotation;
 - (BOOL)checkProximityOf:(UIImageView*)first to:(UIImageView*)second;
