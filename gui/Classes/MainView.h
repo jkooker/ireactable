@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReactController.h"
 
 @interface MainView : UIView {
     IBOutlet UIImageView *squarewave;
@@ -20,6 +21,8 @@
     CGPoint primaryTouchLocation;
     CGPoint secondaryTouchStartLocation;
     CGPoint secondaryTouchEndLocation;
+    
+    ReactController *react;
 }
 
 - (void)activateImage:(UIImageView*)image;

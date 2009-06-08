@@ -9,7 +9,6 @@
 #import "MainView.h"
 
 #define CGPointNull CGPointMake(-1, -1)
-#define TRACE NSLog(@"%@ %s", [self class], _cmd)
 
 CGFloat angleBetweenPoints(CGPoint first, CGPoint second) {
     return atan2f(first.y - second.y, first.x - second.x);
@@ -43,6 +42,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     }
     
     primaryTouchLocation = secondaryTouchStartLocation = CGPointNull;
+    react = [ReactController sharedReactController];
 }
 
 

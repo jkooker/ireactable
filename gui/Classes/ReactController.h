@@ -10,6 +10,8 @@
 #import "lo/lo.h"
 #import "ReactObject.h"
 
+#define TRACE NSLog(@"%@ %s", [self class], _cmd)
+
 @interface ReactController : NSObject {
     NSString *oscAddress;
     NSString *oscPort;
@@ -32,5 +34,6 @@
 + (ReactController *)sharedReactController;
 
 - (lo_address)loAddress;
+- (void)sendPeriodicUpdates;
 
 @end

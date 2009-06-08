@@ -13,6 +13,6 @@
 
 @synthesize targetName;
 @synthesize param1;
-@synthesize param1;
+@synthesize param2;
 
 @end

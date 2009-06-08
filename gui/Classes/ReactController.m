@@ -29,6 +29,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
         // OSC initializations
         t = lo_address_new([oscAddress cStringUsingEncoding:[NSString defaultCStringEncoding]], [oscPort cStringUsingEncoding:[NSString defaultCStringEncoding]]);
         lo_send(t, "/hello", ""); // make the connection
+        
+        [NSThread detachNewThreadSelector:@selector(sendPeriodicUpdates) toTarget:self withObject:nil];
 	}
 	return self;
 }
@@ -36,5 +38,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
 - (lo_address)loAddress {
     return t;
 }
+
+- (void)sendPeriodicUpdates { TRACE;
+    // do nothing
+}
+
 
 @end
