@@ -50,6 +50,8 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     squarewave.reactObject = [react squarewave];
     vcf.reactObject = [react vcf];
     lfo.reactObject = [react lfo];
+    
+    [self updateAllConnections];
 }
 
 
@@ -107,7 +109,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             for (ReactImageView *anImage in allImages) {
                 if (CGRectContainsPoint([anImage frame], primaryTouchLocation)) {
                     [self activateImage:anImage];
-                    [self updateConnectionsFrom:anImage];
+                    [self updateAllConnections];
                     break; // don't try to activate any others
                 }
             }
@@ -128,7 +130,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
             // if a view was tapped, move it here
             if (activeImage) {
                 activeImage.center = [touch locationInView:self];
-                [self updateConnectionsFrom:activeImage];
+                [self updateAllConnections];
                 [self setNeedsDisplay];
             }
         } else if (CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchStartLocation) || CGPointEqualToPoint([touch previousLocationInView:self], secondaryTouchEndLocation)) {
@@ -208,6 +210,13 @@ static CGFloat kScaleFactor = 1.3;
     currentRotation = angle;
     //NSLog(@"angle control: %.2f", convertAngleToControlValue(angle + activeImage.angle));
     activeImage.reactObject.param1 = convertAngleToControlValue(angle + activeImage.angle);
+}
+
+- (void)updateAllConnections
+{
+    for (ReactImageView *image in allImages) {
+        [self updateConnectionsFrom:image];
+    }
 }
 
 - (void)updateConnectionsFrom:(ReactImageView*)image

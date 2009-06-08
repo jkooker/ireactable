@@ -32,6 +32,7 @@
 - (void)deactivateImage;
 - (void)updateRotation;
 - (CGFloat)distanceFrom:(UIImageView*)first to:(UIImageView*)second;
+- (void)updateAllConnections;
 - (void)updateConnectionsFrom:(ReactImageView*)image;
 
 @end
