@@ -23,6 +23,7 @@
     CGPoint secondaryTouchStartLocation;
     CGFloat secondaryTouchStartAngle;
     CGPoint secondaryTouchEndLocation;
+    CGFloat currentRotation;
     
     ReactController *react;
 }

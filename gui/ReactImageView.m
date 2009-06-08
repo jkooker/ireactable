@@ -11,6 +11,7 @@
 
 @implementation ReactImageView
 @synthesize reactObject;
+@synthesize angle;
 /*
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

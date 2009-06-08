@@ -11,8 +11,10 @@
 
 @interface ReactImageView : UIImageView {
     ReactObject *reactObject;
+    CGFloat angle;
 }
 
 @property (retain, readwrite) ReactObject *reactObject;
+@property CGFloat angle;
 
 @end

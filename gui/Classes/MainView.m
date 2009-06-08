@@ -43,6 +43,7 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     
     primaryTouchLocation = secondaryTouchStartLocation = secondaryTouchEndLocation = CGPointNull;
     secondaryTouchStartAngle = 0;
+    currentRotation = 0;
     
     react = [ReactController sharedReactController];
     
@@ -176,7 +177,8 @@ static CGFloat kScaleFactor = 1.3;
 
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:GROW_ANIMATION_DURATION_SECONDS];
-	image.transform = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
+    CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
+	image.transform = CGAffineTransformRotate(t, image.angle);
     image.center = primaryTouchLocation;
     [self setNeedsDisplay];
 	[UIView commitAnimations];
@@ -187,9 +189,11 @@ static CGFloat kScaleFactor = 1.3;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationDuration:SHRINK_ANIMATION_DURATION_SECONDS];
 	// Set the transform back to the identity, thus undoing the previous scaling effect.
-	activeImage.transform = CGAffineTransformIdentity;
+    activeImage.angle += currentRotation;
+	activeImage.transform = CGAffineTransformMakeRotation(activeImage.angle);
 	[UIView commitAnimations];
     
+    currentRotation = 0;
     activeImage = nil;
 }
 
@@ -198,11 +202,11 @@ static CGFloat kScaleFactor = 1.3;
     CGFloat angle = angleBetweenPoints(primaryTouchLocation, secondaryTouchEndLocation) - secondaryTouchStartAngle;
     
     CGAffineTransform t = CGAffineTransformMakeScale(kScaleFactor, kScaleFactor);
-    activeImage.transform = CGAffineTransformRotate(t, angle);
+    activeImage.transform = CGAffineTransformRotate(t, angle + activeImage.angle);
 
-    NSLog(@"angle control: %.2f", convertAngleToControlValue(angle));
-    
-    activeImage.reactObject.param1 = convertAngleToControlValue(angle);
+    currentRotation = angle;
+    NSLog(@"angle control: %.2f", convertAngleToControlValue(angle + activeImage.angle));
+    activeImage.reactObject.param1 = convertAngleToControlValue(angle + activeImage.angle);
 }
 
 @end
