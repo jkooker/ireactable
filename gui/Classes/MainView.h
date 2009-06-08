@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ReactController.h"
+#import "ReactImageView.h"
 
 @interface MainView : UIView {
-    IBOutlet UIImageView *squarewave;
-    IBOutlet UIImageView *vcf;
-    IBOutlet UIImageView *lfo;
+    IBOutlet ReactImageView *squarewave;
+    IBOutlet ReactImageView *vcf;
+    IBOutlet ReactImageView *lfo;
     IBOutlet UIImageView *sink;
     
     UIImageView *activeImage;

@@ -26,6 +26,7 @@
 		9B34FC1D0FDB8CF30035A751 /* liblo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B34FC1C0FDB8CF20035A751 /* liblo.a */; };
 		9BA61B620FDBD024002B6B02 /* ReactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BA61B610FDBD024002B6B02 /* ReactController.m */; };
 		9BBE578A0FDC5F6200CA923F /* ReactObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE57890FDC5F6200CA923F /* ReactObject.m */; };
+		9BBE585B0FDCD19300CA923F /* ReactImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BBE585A0FDCD19300CA923F /* ReactImageView.m */; };
 		9BD833470FDBE75F00760DEA /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD833460FDBE75F00760DEA /* icon.png */; };
 		9BD8334B0FDBEA0200760DEA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD8334A0FDBEA0200760DEA /* Default.png */; };
 		9BE394E10FDB3D240035D668 /* liblo.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BE394E00FDB3D240035D668 /* liblo.dylib */; };
@@ -62,6 +63,8 @@
 		9BA61B610FDBD024002B6B02 /* ReactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactController.m; sourceTree = "<group>"; };
 		9BBE57880FDC5F6200CA923F /* ReactObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactObject.h; sourceTree = "<group>"; };
 		9BBE57890FDC5F6200CA923F /* ReactObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactObject.m; sourceTree = "<group>"; };
+		9BBE58590FDCD19300CA923F /* ReactImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactImageView.h; sourceTree = "<group>"; };
+		9BBE585A0FDCD19300CA923F /* ReactImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactImageView.m; sourceTree = "<group>"; };
 		9BD833460FDBE75F00760DEA /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = images/icon.png; sourceTree = "<group>"; };
 		9BD8334A0FDBEA0200760DEA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = images/Default.png; sourceTree = "<group>"; };
 		9BE394E00FDB3D240035D668 /* liblo.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblo.dylib; path = /usr/local/lib/liblo.dylib; sourceTree = "<absolute>"; };
@@ -124,6 +127,8 @@
 				289233A50DB2D0840083E9F9 /* MainView.m */,
 				289233A80DB2D0DB0083E9F9 /* MainViewController.h */,
 				289233A90DB2D0DB0083E9F9 /* MainViewController.m */,
+				9BBE58590FDCD19300CA923F /* ReactImageView.h */,
+				9BBE585A0FDCD19300CA923F /* ReactImageView.m */,
 			);
 			name = "Main View";
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				289233B00DB2D0DB0083E9F9 /* FlipsideViewController.m in Sources */,
 				9BA61B620FDBD024002B6B02 /* ReactController.m in Sources */,
 				9BBE578A0FDC5F6200CA923F /* ReactObject.m in Sources */,
+				9BBE585B0FDCD19300CA923F /* ReactImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,6 +43,10 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     
     primaryTouchLocation = secondaryTouchStartLocation = CGPointNull;
     react = [ReactController sharedReactController];
+    
+    squarewave.reactObject = [react squarewave];
+    vcf.reactObject = [react vcf];
+    lfo.reactObject = [react lfo];
 }
 
 
