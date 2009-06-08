@@ -10,7 +10,13 @@
 
 
 @interface ReactObject : NSObject {
-
+    CGFloat param1;
+    CGFloat param2;
+    NSString *targetName;
 }
+
+@property (copy,readwrite) NSString *targetName;
+@property CGFloat param1;
+@property CGFloat param2;
 
 @end

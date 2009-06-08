@@ -11,4 +11,8 @@
 
 @implementation ReactObject
 
+@synthesize targetName;
+@synthesize param1;
+@synthesize param1;
+
 @end
