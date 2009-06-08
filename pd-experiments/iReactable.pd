@@ -67,7 +67,7 @@ lfo-params 0.5 0.5;
 #X obj 240 181 receive vcf-params;
 #X obj 420 180 receive lfo-params;
 #X obj 420 224 unpack f f;
-#N canvas 633 22 586 409 tester 1;
+#N canvas 781 22 586 409 tester 1;
 #X msg 38 21 \; squarewave-target devnull;
 #X msg 38 54 \; squarewave-target sink;
 #X msg 232 24 \; vcf-target devnull;
@@ -76,7 +76,7 @@ lfo-params 0.5 0.5;
 #X obj 34 322 pack f f;
 #X obj 79 294 t b f;
 #X obj 34 135 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
--1 -1 6350 1;
+-1 -1 7600 1;
 #X floatatom 34 276 5 0 0 0 - - -;
 #X floatatom 78 272 5 0 0 0 - - -;
 #X obj 77 132 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
@@ -86,11 +86,11 @@ lfo-params 0.5 0.5;
 #X obj 179 320 pack f f;
 #X obj 224 292 t b f;
 #X obj 179 133 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
--1 -1 6350 1;
+-1 -1 6200 1;
 #X floatatom 179 274 5 0 0 0 - - -;
 #X floatatom 223 270 5 0 0 0 - - -;
 #X obj 222 130 vsl 15 128 0 1 0 0 empty sliders empty 0 -9 0 10 -262144
--1 -1 6350 1;
+-1 -1 12700 1;
 #X obj 179 348 s vcf-params;
 #X obj 312 319 pack f f;
 #X obj 357 291 t b f;
