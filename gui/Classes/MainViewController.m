@@ -39,6 +39,8 @@
 
 
 - (void)flipsideViewControllerDidFinish:(FlipsideViewController *)controller {
+    // tell the view to update based on flipside changes
+    [(MainView*)(self.view) updateFromFlipside];
     
 	[self dismissModalViewControllerAnimated:YES];
 }

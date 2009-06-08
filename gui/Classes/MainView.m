@@ -51,6 +51,10 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     vcf.reactObject = [react vcf];
     lfo.reactObject = [react lfo];
     
+    squarewave.hidden = !squarewave.reactObject.isEnabled;
+    vcf.hidden = !vcf.reactObject.isEnabled;
+    lfo.hidden = !lfo.reactObject.isEnabled;
+    
     [self updateAllConnections];
 }
 
@@ -64,17 +68,17 @@ CGFloat convertAngleToControlValue(CGFloat angle) {
     
     CGContextBeginPath(contextRef);
 
-    if (vcf.isConnected) {
+    if (vcf.isConnected && vcf.reactObject.isEnabled) {
         // draw from vcf to its destination
         CGContextMoveToPoint(contextRef, vcf.center.x, vcf.center.y);
         CGContextAddLineToPoint(contextRef, vcf.target.center.x, vcf.target.center.y);
     }
-    if (squarewave.isConnected) {
+    if (squarewave.isConnected && squarewave.reactObject.isEnabled) {
         // draw from squarewave to its destination
         CGContextMoveToPoint(contextRef, squarewave.center.x, squarewave.center.y);
         CGContextAddLineToPoint(contextRef, squarewave.target.center.x, squarewave.target.center.y);
     }
-    if (lfo.isConnected) {
+    if (lfo.isConnected && lfo.reactObject.isEnabled) {
         // draw from lfo to its destination
         CGContextMoveToPoint(contextRef, lfo.center.x, lfo.center.y);
         CGContextAddLineToPoint(contextRef, lfo.target.center.x, lfo.target.center.y);
@@ -300,5 +304,15 @@ static CGFloat kScaleFactor = 1.3;
     }
 }
 
+- (void)updateFromFlipside
+{
+    // unhide imageviews
+    for (ReactImageView *image in allImages) {
+        image.hidden = !(image.reactObject.isEnabled);
+    }
+    
+    // tell the background to redraw
+    [self setNeedsDisplay];
+}
 
 @end

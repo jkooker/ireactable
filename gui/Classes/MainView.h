@@ -34,5 +34,6 @@
 - (CGFloat)distanceFrom:(UIImageView*)first to:(UIImageView*)second;
 - (void)updateAllConnections;
 - (void)updateConnectionsFrom:(ReactImageView*)image;
+- (void)updateFromFlipside;
 
 @end

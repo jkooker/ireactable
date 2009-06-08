@@ -23,9 +23,9 @@ enum tableGroups {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor viewFlipsideBackgroundColor];
     
-    reactController = [ReactController sharedReactController];
-    t = [reactController loAddress];
-    
+    react = [ReactController sharedReactController];
+    t = [react loAddress];
+        
     // set up table data
     tableTitles = [[NSArray arrayWithObjects:@"Objects", @"Configuration", @"Testing", @"Information", nil] retain];
     objectNames = [[NSArray arrayWithObjects:@"Square Wave", @"Filter", @"Oscillator", nil] retain];
@@ -34,11 +34,11 @@ enum tableGroups {
     configItems = [[NSArray arrayWithObjects:
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"IP", @"title",
-            reactController.oscAddress, @"value",
+            react.oscAddress, @"value",
             nil],
         [NSDictionary dictionaryWithObjectsAndKeys:
             @"Port", @"title",
-            reactController.oscPort, @"value",
+            react.oscPort, @"value",
             nil],
         nil] retain];
 }
@@ -103,7 +103,11 @@ enum tableGroups {
             }
             
             cell.textLabel.text = [objectNames objectAtIndex:indexPath.row];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            if (((ReactObject*)[react.reactObjects objectAtIndex:indexPath.row]).isEnabled) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
             break;
         case kConfiguration:
             cell = [tableView dequeueReusableCellWithIdentifier:cellIDBlueValue];
@@ -153,11 +157,15 @@ enum tableGroups {
 {
     switch (indexPath.section) {
         case kObjects:
-            // flip on and off the checkmarks
-            if ([tableView cellForRowAtIndexPath:indexPath].accessoryType == UITableViewCellAccessoryCheckmark) {
-                [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
-            } else {
+            // flip on and off the objects
+            ; // TODO: no idea why the compiler wants this empty statement here
+            ReactObject *theObject = (ReactObject*)[react.reactObjects objectAtIndex:indexPath.row];
+            if (!theObject.isEnabled) {
+                theObject.isEnabled = YES;
                 [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            } else {
+                theObject.isEnabled = NO;
+                [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
             }
             break;
         case kTesting:
