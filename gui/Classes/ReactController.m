@@ -30,9 +30,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
         t = lo_address_new([oscAddress cStringUsingEncoding:[NSString defaultCStringEncoding]], [oscPort cStringUsingEncoding:[NSString defaultCStringEncoding]]);
         lo_send(t, "/hello", ""); // make the connection
         
+        squarewave = [[ReactObject alloc] init];
+        vcf = [[ReactObject alloc] init];
+        lfo = [[ReactObject alloc] init];
+        
         [NSThread detachNewThreadSelector:@selector(sendPeriodicUpdates) toTarget:self withObject:nil];
 	}
 	return self;
+}
+
+- (void)dealloc {
+    lo_address_free(t);
+    [super dealloc];
 }
 
 - (lo_address)loAddress {
@@ -40,7 +49,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ReactController);
 }
 
 - (void)sendPeriodicUpdates { TRACE;
-    // do nothing
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    BOOL sendOSC = YES;
+    // send all state information every 1 second
+    while (sendOSC) {
+        lo_send(t, "/ireactable/connect", "ss", "squarewave", [[squarewave targetName] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        lo_send(t, "/ireactable/connect", "ss", "lfo", [[lfo targetName] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        lo_send(t, "/ireactable/connect", "ss", "vcf", [[vcf targetName] cStringUsingEncoding:[NSString defaultCStringEncoding]]);
+        lo_send(t, "/ireactable/squarewave", "ff", [squarewave param1], [squarewave param2]);
+        lo_send(t, "/ireactable/vcf", "ff", [vcf param1], [vcf param2]);
+        lo_send(t, "/ireactable/lfo", "ff", [lfo param2], [lfo param2]);
+        
+        [NSThread sleepForTimeInterval:1.0];
+    }
+    [pool release];
 }
 
 

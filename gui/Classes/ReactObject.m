@@ -15,4 +15,15 @@
 @synthesize param1;
 @synthesize param2;
 
+- (id)init
+{
+	if (self = [super init]) {
+        // initialization code
+        self.targetName = @"devnull";
+        self.param1 = 0.5f;
+        self.param2 = 0.5f;
+	}
+	return self;
+}
+
 @end
